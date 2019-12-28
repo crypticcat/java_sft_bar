@@ -1,15 +1,11 @@
 package sft.bar.addressbook;
 
-import java.util.regex.Pattern;
 import java.util.concurrent.TimeUnit;
 
 import org.testng.annotations.*;
 
-import static org.testng.Assert.*;
-
 import org.openqa.selenium.*;
 import org.openqa.selenium.firefox.FirefoxDriver;
-import org.openqa.selenium.support.ui.Select;
 
 public class ContactCreationTests {
     private WebDriver wd;
@@ -19,23 +15,23 @@ public class ContactCreationTests {
         System.setProperty("webdriver.gecko.driver", "C:\\geckodriver-v0.26.0-win64\\geckodriver.exe");
         wd = new FirefoxDriver();
         wd.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
-        login();
+        login("admin", "secret");
     }
 
-    private void login() {
+    private void login(String username, String password) {
         wd.get("http://localhost/");
         wd.findElement(By.name("user")).click();
         wd.findElement(By.name("user")).clear();
-        wd.findElement(By.name("user")).sendKeys("admin");
+        wd.findElement(By.name("user")).sendKeys(username);
         wd.findElement(By.name("pass")).clear();
-        wd.findElement(By.name("pass")).sendKeys("secret");
+        wd.findElement(By.name("pass")).sendKeys(password);
         wd.findElement(By.xpath("//input[@value='Login']")).click();
     }
 
     @Test
     public void testContactCreation() throws Exception {
         initContactCreation();
-        fillContactForm();
+        fillContactForm("n5", "n5", "address5", "phone5", "email5");
         submitContactCreation();
         returnToHomePage();
     }
@@ -48,22 +44,22 @@ public class ContactCreationTests {
         wd.findElement(By.xpath("(//input[@name='submit'])[2]")).click();
     }
 
-    private void fillContactForm() {
+    private void fillContactForm(String firstname, String lastname, String address, String mobile, String email) {
         wd.findElement(By.name("firstname")).click();
         wd.findElement(By.name("firstname")).clear();
-        wd.findElement(By.name("firstname")).sendKeys("n5");
+        wd.findElement(By.name("firstname")).sendKeys(firstname);
         wd.findElement(By.name("lastname")).click();
         wd.findElement(By.name("lastname")).clear();
-        wd.findElement(By.name("lastname")).sendKeys("n5");
+        wd.findElement(By.name("lastname")).sendKeys(lastname);
         wd.findElement(By.name("address")).click();
         wd.findElement(By.name("address")).clear();
-        wd.findElement(By.name("address")).sendKeys("address5");
+        wd.findElement(By.name("address")).sendKeys(address);
         wd.findElement(By.name("mobile")).click();
         wd.findElement(By.name("mobile")).clear();
-        wd.findElement(By.name("mobile")).sendKeys("phone5");
+        wd.findElement(By.name("mobile")).sendKeys(mobile);
         wd.findElement(By.name("email")).click();
         wd.findElement(By.name("email")).clear();
-        wd.findElement(By.name("email")).sendKeys("email5");
+        wd.findElement(By.name("email")).sendKeys(email);
     }
 
     private void initContactCreation() {
