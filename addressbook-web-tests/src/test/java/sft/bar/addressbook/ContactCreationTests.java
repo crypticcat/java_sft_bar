@@ -8,7 +8,7 @@ import org.openqa.selenium.*;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.support.ui.Select;
 
-public class ContactCreationTest {
+public class ContactCreationTests {
   private WebDriver driver;
   private String baseUrl;
   private boolean acceptNextAlert = true;
@@ -16,6 +16,7 @@ public class ContactCreationTest {
 
   @BeforeClass(alwaysRun = true)
   public void setUp() throws Exception {
+    System.setProperty("webdriver.gecko.driver", "C:\\geckodriver-v0.26.0-win64\\geckodriver.exe");
     driver = new FirefoxDriver();
     baseUrl = "https://www.katalon.com/";
     driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
@@ -24,23 +25,29 @@ public class ContactCreationTest {
   @Test
   public void testContactCreation() throws Exception {
     driver.get("http://localhost/");
+    driver.findElement(By.name("user")).click();
+    driver.findElement(By.name("user")).clear();
+    driver.findElement(By.name("user")).sendKeys("admin");
+    driver.findElement(By.name("pass")).clear();
+    driver.findElement(By.name("pass")).sendKeys("secret");
     driver.findElement(By.xpath("//input[@value='Login']")).click();
     driver.findElement(By.linkText("add new")).click();
     driver.findElement(By.name("firstname")).click();
     driver.findElement(By.name("firstname")).clear();
-    driver.findElement(By.name("firstname")).sendKeys("n3");
+    driver.findElement(By.name("firstname")).sendKeys("n5");
     driver.findElement(By.name("lastname")).click();
     driver.findElement(By.name("lastname")).clear();
-    driver.findElement(By.name("lastname")).sendKeys("n3");
+    driver.findElement(By.name("lastname")).sendKeys("n5");
     driver.findElement(By.name("address")).click();
     driver.findElement(By.name("address")).clear();
-    driver.findElement(By.name("address")).sendKeys("address3");
+    driver.findElement(By.name("address")).sendKeys("address5");
     driver.findElement(By.name("mobile")).click();
     driver.findElement(By.name("mobile")).clear();
-    driver.findElement(By.name("mobile")).sendKeys("phone3");
+    driver.findElement(By.name("mobile")).sendKeys("phone5");
     driver.findElement(By.name("email")).click();
     driver.findElement(By.name("email")).clear();
-    driver.findElement(By.name("email")).sendKeys("email3");
+    driver.findElement(By.name("email")).sendKeys("email5");
+    driver.findElement(By.name("theform")).click();
     driver.findElement(By.xpath("(//input[@name='submit'])[2]")).click();
     driver.findElement(By.linkText("home")).click();
     driver.findElement(By.linkText("Logout")).click();
