@@ -16,10 +16,6 @@ public class ContactCreationTests {
     System.setProperty("webdriver.gecko.driver", "C:\\geckodriver-v0.26.0-win64\\geckodriver.exe");
     wd = new FirefoxDriver();
     wd.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
-  }
-
-  @Test
-  public void testContactCreation() throws Exception {
     wd.get("http://localhost/");
     wd.findElement(By.name("user")).click();
     wd.findElement(By.name("user")).clear();
@@ -27,6 +23,10 @@ public class ContactCreationTests {
     wd.findElement(By.name("pass")).clear();
     wd.findElement(By.name("pass")).sendKeys("secret");
     wd.findElement(By.xpath("//input[@value='Login']")).click();
+  }
+
+  @Test
+  public void testContactCreation() throws Exception {
     wd.findElement(By.linkText("add new")).click();
     wd.findElement(By.name("firstname")).click();
     wd.findElement(By.name("firstname")).clear();
@@ -46,11 +46,11 @@ public class ContactCreationTests {
     wd.findElement(By.name("theform")).click();
     wd.findElement(By.xpath("(//input[@name='submit'])[2]")).click();
     wd.findElement(By.linkText("home")).click();
-    wd.findElement(By.linkText("Logout")).click();
   }
 
   @AfterMethod(alwaysRun = true)
   public void tearDown() throws Exception {
+    wd.findElement(By.linkText("Logout")).click();
     wd.quit();
   }
 
