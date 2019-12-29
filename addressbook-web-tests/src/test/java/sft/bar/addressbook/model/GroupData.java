@@ -1,4 +1,4 @@
-package sft.bar.addressbook;
+package sft.bar.addressbook.model;
 
 public class GroupData {
     private final String name;

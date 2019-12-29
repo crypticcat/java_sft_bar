@@ -1,4 +1,4 @@
-package sft.bar.addressbook;
+package sft.bar.addressbook.model;
 
 public class ContactData {
     private final String firstname;
