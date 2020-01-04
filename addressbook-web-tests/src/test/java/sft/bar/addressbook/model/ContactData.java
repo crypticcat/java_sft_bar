@@ -6,7 +6,7 @@ public class ContactData {
     private final String address;
     private final String mobile;
     private final String email;
-    private final String group;
+    private String group;
 
     public ContactData(String firstname, String lastname, String address, String mobile, String email, String group) {
         this.firstname = firstname;
