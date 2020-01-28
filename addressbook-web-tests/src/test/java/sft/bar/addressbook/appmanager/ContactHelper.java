@@ -54,7 +54,7 @@ public class ContactHelper extends HelperBase{
     public void deleteContact() {
         click(By.xpath("//input[@value='Delete']"));
         wd.switchTo().alert().accept();
-        wd.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+        wd.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
     }
 
     public void createContact(ContactData contact) {
