@@ -1,5 +1,6 @@
 package sft.bar.addressbook.appmanager;
 
+import org.jetbrains.annotations.NotNull;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -51,10 +52,33 @@ public class ContactHelper extends HelperBase{
         click(By.xpath("//input[@name='update']"));
     }
 
+    @NotNull
+    public ContactData modifyContact(List<ContactData> before, int index) {
+        initContactModification(index);
+        ContactData contact = new ContactData(before.get(index).getId(),"n5", "n5", "address5", "phone5", "email5", null);
+        fillContactForm(contact, false);
+        submitContactModification();
+        gotoHomePage();
+        return contact;
+    }
+
+    public void gotoHomePage() {
+        if (isElementPresent(By.id("maintable"))) {
+            return;
+        }
+        click(By.linkText("home"));
+    }
+
     public void deleteContact() {
         click(By.xpath("//input[@value='Delete']"));
         wd.switchTo().alert().accept();
         wd.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
+    }
+
+
+    public void removeContact(int index) {
+        selectContact(index);
+        deleteContact();
     }
 
     public void createContact(ContactData contact) {
@@ -84,4 +108,5 @@ public class ContactHelper extends HelperBase{
         }
         return contacts;
     }
+
 }
