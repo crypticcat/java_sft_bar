@@ -53,16 +53,16 @@ public class ContactHelper extends HelperBase{
     }
 
     @NotNull
-    public ContactData modifyContact(List<ContactData> before, int index) {
+    public ContactData modify(List<ContactData> before, int index) {
         initContactModification(index);
         ContactData contact = new ContactData(before.get(index).getId(),"n5", "n5", "address5", "phone5", "email5", null);
         fillContactForm(contact, false);
         submitContactModification();
-        gotoHomePage();
+        homePage();
         return contact;
     }
 
-    public void gotoHomePage() {
+    public void homePage() {
         if (isElementPresent(By.id("maintable"))) {
             return;
         }
@@ -76,26 +76,22 @@ public class ContactHelper extends HelperBase{
     }
 
 
-    public void removeContact(int index) {
+    public void delete(int index) {
         selectContact(index);
         deleteContact();
     }
 
-    public void createContact(ContactData contact) {
+    public void create(ContactData contact) {
         initContactCreation();
         fillContactForm(contact, true);
         submitContactCreation();
-    }
-
-    public boolean isThereAContact() {
-        return isElementPresent(By.name("selected[]"));
     }
 
     public int getContactCount() {
         return wd.findElements(By.name("selected[]")).size();
     }
 
-    public List<ContactData> getContactList() {
+    public List<ContactData> list() {
         List<ContactData> contacts = new ArrayList<ContactData>();
         List<WebElement> elements = wd.findElements(By.name("entry"));
         for (WebElement element: elements) {
