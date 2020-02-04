@@ -52,14 +52,11 @@ public class ContactHelper extends HelperBase{
         click(By.xpath("//input[@name='update']"));
     }
 
-    @NotNull
-    public ContactData modify(List<ContactData> before, int index) {
+    public void modify(int index, ContactData contact){
         initContactModification(index);
-        ContactData contact = new ContactData(before.get(index).getId(),"n5", "n5", "address5", "phone5", "email5", null);
         fillContactForm(contact, false);
         submitContactModification();
         homePage();
-        return contact;
     }
 
     public void homePage() {
@@ -99,8 +96,7 @@ public class ContactHelper extends HelperBase{
             String firstname = cells.get(1).getText();
             String lastname = cells.get(2).getText();
             int id = Integer.parseInt(element.findElement(By.tagName("input")).getAttribute("value"));
-            ContactData contact = new ContactData(id, firstname, lastname, "address5", "phone5", "email5", null);
-            contacts.add(contact);
+            contacts.add(new ContactData().withId(id).withFirstname(firstname).withLastname(lastname).withAddress("address5").withMobile("phone5").withEmail("email5").withGroup("NadyaTest"));
         }
         return contacts;
     }
