@@ -56,6 +56,7 @@ public class ContactHelper extends HelperBase{
         initContactModification(contact.getId());
         fillContactForm(contact, false);
         submitContactModification();
+        contactCache = null;
         homePage();
     }
 
@@ -75,6 +76,7 @@ public class ContactHelper extends HelperBase{
     public void delete(ContactData contact) {
         selectContactById(contact.getId());
         deleteContact();
+        contactCache = null;
         homePage();
     }
 
@@ -82,23 +84,30 @@ public class ContactHelper extends HelperBase{
         initContactCreation();
         fillContactForm(contact, true);
         submitContactCreation();
+        contactCache = null;
     }
 
     public int getContactCount() {
         return wd.findElements(By.name("selected[]")).size();
     }
 
+    private Contacts contactCache = null;
+
     public Contacts all() {
-        Contacts contacts = new Contacts();
+        if (contactCache != null) {
+            return new Contacts(contactCache);
+        }
+
+        contactCache = new Contacts();
         List<WebElement> elements = wd.findElements(By.name("entry"));
         for (WebElement element: elements) {
             List<WebElement> cells = wd.findElements(By.tagName("td"));
             String firstname = cells.get(1).getText();
             String lastname = cells.get(2).getText();
             int id = Integer.parseInt(element.findElement(By.tagName("input")).getAttribute("value"));
-            contacts.add(new ContactData().withId(id).withFirstname(firstname).withLastname(lastname).withAddress("address5").withMobile("phone5").withEmail("email5").withGroup("NadyaTest"));
+            contactCache.add(new ContactData().withId(id).withFirstname(firstname).withLastname(lastname).withAddress("address5").withMobile("phone5").withEmail("email5").withGroup("NadyaTest"));
         }
-        return contacts;
+        return contactCache;
     }
 
 }
