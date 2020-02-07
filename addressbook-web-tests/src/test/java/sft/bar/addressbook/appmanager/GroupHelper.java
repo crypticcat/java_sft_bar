@@ -14,8 +14,15 @@ public class GroupHelper extends HelperBase {
         super(wd);
     }
 
-    public void submitGroupCreation() {
-        click(By.name("submit"));
+    public void createGroup(GroupData group) {
+        initGroupCreation("new");
+        fillGroupForm(group);
+        submitGroupCreation();
+        groupCache = null;
+    }
+
+    public void initGroupCreation(String s) {
+        click(By.name(s));
     }
 
     public void fillGroupForm(GroupData groupData) {
@@ -24,12 +31,17 @@ public class GroupHelper extends HelperBase {
         type(By.name("group_footer"), groupData.getFooter());
     }
 
-    public void initGroupCreation(String s) {
-        click(By.name(s));
+    public void submitGroupCreation() {
+        click(By.name("submit"));
     }
 
-    public void deleteSelectedGroups() {
-        click(By.name("delete"));
+    public void modify(GroupData group) {
+        selectGroupById(group.getId());
+        initGroupModification();
+        fillGroupForm(group);
+        submitGroupModification();
+        groupCache = null;
+        groupPage();
     }
 
     public void selectGroupById(int id) {
@@ -44,27 +56,16 @@ public class GroupHelper extends HelperBase {
         click(By.name("update"));
     }
 
-    public void createGroup(GroupData group) {
-        initGroupCreation("new");
-        fillGroupForm(group);
-        submitGroupCreation();
-        groupCache = null;
-    }
-
-    public void modify(GroupData group) {
-        selectGroupById(group.getId());
-        initGroupModification();
-        fillGroupForm(group);
-        submitGroupModification();
-        groupCache = null;
-        groupPage();
-    }
 
     public void delete(GroupData group) {
         selectGroupById(group.getId());
         deleteSelectedGroups();
         groupCache = null;
         groupPage();
+    }
+
+    public void deleteSelectedGroups() {
+        click(By.name("delete"));
     }
 
     public void groupPage() {

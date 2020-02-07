@@ -17,8 +17,15 @@ public class ContactHelper extends HelperBase{
         super(wd);
     }
 
-    public void submitContactCreation() {
-        click(By.xpath("(//input[@name='submit'])[2]"));
+    public void create(ContactData contact) {
+        initContactCreation();
+        fillContactForm(contact, true);
+        submitContactCreation();
+        contactCache = null;
+    }
+
+    public void initContactCreation() {
+        click(By.linkText("add new"));
     }
 
     public void fillContactForm(ContactData contactData, boolean creation) {
@@ -35,8 +42,17 @@ public class ContactHelper extends HelperBase{
         }
     }
 
-    public void initContactCreation() {
-        click(By.linkText("add new"));
+    public void submitContactCreation() {
+        click(By.xpath("(//input[@name='submit'])[2]"));
+    }
+
+    public void modify(ContactData contact){
+        selectContactById(contact.getId());
+        initContactModification(contact.getId());
+        fillContactForm(contact, false);
+        submitContactModification();
+        contactCache = null;
+        homePage();
     }
 
     public void selectContactById(int id) {
@@ -51,26 +67,11 @@ public class ContactHelper extends HelperBase{
         click(By.xpath("//input[@name='update']"));
     }
 
-    public void modify(ContactData contact){
-        selectContactById(contact.getId());
-        initContactModification(contact.getId());
-        fillContactForm(contact, false);
-        submitContactModification();
-        contactCache = null;
-        homePage();
-    }
-
     public void homePage() {
         if (isElementPresent(By.id("maintable"))) {
             return;
         }
         click(By.linkText("home"));
-    }
-
-    public void deleteContact() {
-        click(By.xpath("//input[@value='Delete']"));
-        wd.switchTo().alert().accept();
-        wd.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
     }
 
     public void delete(ContactData contact) {
@@ -80,11 +81,10 @@ public class ContactHelper extends HelperBase{
         homePage();
     }
 
-    public void create(ContactData contact) {
-        initContactCreation();
-        fillContactForm(contact, true);
-        submitContactCreation();
-        contactCache = null;
+    public void deleteContact() {
+        click(By.xpath("//input[@value='Delete']"));
+        wd.switchTo().alert().accept();
+        wd.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
     }
 
     public int getContactCount() {
