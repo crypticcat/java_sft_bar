@@ -12,6 +12,7 @@
     <orderEntry type="library" name="Gradle: org.seleniumhq.selenium:selenium-java:4.0.0-alpha-3" level="project" />
     <orderEntry type="library" name="Gradle: org.testng:testng:7.0.0" level="project" />
     <orderEntry type="library" name="Gradle: org.hamcrest:java-hamcrest:2.0.0.0" level="project" />
+    <orderEntry type="library" name="Gradle: com.beust:jcommander:1.78" level="project" />
     <orderEntry type="library" name="Gradle: org.seleniumhq.selenium:selenium-support:4.0.0-alpha-3" level="project" />
     <orderEntry type="library" name="Gradle: org.seleniumhq.selenium:selenium-chrome-driver:4.0.0-alpha-3" level="project" />
     <orderEntry type="library" name="Gradle: org.seleniumhq.selenium:selenium-edgehtml-driver:4.0.0-alpha-3" level="project" />
@@ -27,7 +28,6 @@
     <orderEntry type="library" name="Gradle: org.seleniumhq.selenium:selenium-http:4.0.0-alpha-3" level="project" />
     <orderEntry type="library" name="Gradle: org.seleniumhq.selenium:selenium-json:4.0.0-alpha-3" level="project" />
     <orderEntry type="library" name="Gradle: org.seleniumhq.selenium:selenium-api:4.0.0-alpha-3" level="project" />
-    <orderEntry type="library" name="Gradle: com.beust:jcommander:1.72" level="project" />
     <orderEntry type="library" name="Gradle: com.google.guava:guava:27.1-jre" level="project" />
     <orderEntry type="library" name="Gradle: com.squareup.okhttp3:okhttp:4.0.1" level="project" />
     <orderEntry type="library" name="Gradle: io.opentracing:opentracing-api:0.33.0" level="project" />
