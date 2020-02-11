@@ -2,7 +2,6 @@ package sft.bar.addressbook.generators;
 
 import com.beust.jcommander.JCommander;
 import com.beust.jcommander.Parameter;
-import com.beust.jcommander.ParameterException;
 import sft.bar.addressbook.model.GroupData;
 
 import java.io.File;
