@@ -91,7 +91,7 @@ public class ContactHelper extends HelperBase{
         wd.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
     }
 
-    public int getContactCount() {
+    public int count() {
         return wd.findElements(By.name("selected[]")).size();
     }
 
