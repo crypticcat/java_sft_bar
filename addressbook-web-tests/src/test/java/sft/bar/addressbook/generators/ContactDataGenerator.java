@@ -83,9 +83,9 @@ public class ContactDataGenerator {
         for (int i = 0; i < count; i++) {
             contacts.add(new ContactData().withFirstname(String.format("Firstname %s", i)).withLastname(String.format("Lastname %s", i))
                     .withAddress(String.format("Address %s", i))
-                    .withHome(String.format("Home %s", i)).withMobile(String.format("Mobile %s", i)).withWork(String.format("Work %s", i))
-                    .withEmail(String.format("Email %s", i)).withEmail2(String.format("Email2 %s", i)).withEmail3(String.format("Email3 %s", i))
-                    .withGroup(String.format("test %s", i)));
+                    .withHome(String.format("+7981800309%s", i)).withMobile(String.format("+798180030%s1", i)).withWork(String.format("+7812800309%s", i))
+                    .withEmail(String.format("email%s@gmail.com", i)).withEmail2(String.format("email2%s@gmail.com", i)).withEmail3(String.format("email3%s@gmail.com", i))
+                            .withGroup(String.format("test %s", i)));
         }
         return contacts;
     }
