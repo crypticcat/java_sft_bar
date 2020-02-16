@@ -19,6 +19,7 @@ public class GroupHelper extends HelperBase {
         fillGroupForm(group);
         submitGroupCreation();
         groupCache = null;
+        groupPage();
     }
 
     public void initGroupCreation(String s) {
@@ -96,7 +97,7 @@ public class GroupHelper extends HelperBase {
             int id = Integer.parseInt(element.findElement(By.tagName("input")).getAttribute("value"));
             groupCache.add(new GroupData().withId(id).withName(name));
         }
-        return groupCache;
+        return new Groups(groupCache);
     }
 
 }

@@ -22,6 +22,7 @@ public class ContactHelper extends HelperBase{
         fillContactForm(contact, true);
         submitContactCreation();
         contactCache = null;
+        homePage();
     }
 
     public void initContactCreation() {
@@ -117,7 +118,7 @@ public class ContactHelper extends HelperBase{
                     .withAllPhones(allPhones)
                     .withAllEmails(allEmails));
         }
-        return contactCache;
+        return new Contacts(contactCache);
     }
 
     public ContactData infoFromEditForm(ContactData contact) {
