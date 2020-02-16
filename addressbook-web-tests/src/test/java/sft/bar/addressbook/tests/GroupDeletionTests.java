@@ -6,6 +6,7 @@ import org.testng.annotations.Test;
 import sft.bar.addressbook.model.GroupData;
 import sft.bar.addressbook.model.Groups;
 
+import static org.hamcrest.CoreMatchers.*;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.testng.Assert.*;
 
@@ -15,7 +16,7 @@ public class GroupDeletionTests extends TestBase {
   public void ensurePreconditions() {
     app.goTo().groupPage();
     if (app.group().all().size() == 0) {
-      app.group().createGroup(new GroupData().withName("NadyaTest1"));
+      app.group().createGroup(new GroupData().withName("test 0"));
     }
   }
 
@@ -26,7 +27,7 @@ public class GroupDeletionTests extends TestBase {
     app.group().delete(deletedGroup);
     Groups after = app.group().all();
     assertEquals(after.size(), before.size() - 1);
-    assertThat(after, CoreMatchers.equalTo(before.without(deletedGroup)));
+    assertThat(after, equalTo(before.without(deletedGroup)));
   }
 
 }

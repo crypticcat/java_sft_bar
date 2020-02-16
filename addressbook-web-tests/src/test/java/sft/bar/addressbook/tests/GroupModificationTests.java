@@ -15,7 +15,7 @@ public class GroupModificationTests extends TestBase {
     public void ensurePreconditions() {
         app.goTo().groupPage();
         if (app.group().all().size() == 0) {
-            app.group().createGroup(new GroupData().withName("NadyaTest1"));
+            app.group().createGroup(new GroupData().withName("test 0"));
         }
     }
 
