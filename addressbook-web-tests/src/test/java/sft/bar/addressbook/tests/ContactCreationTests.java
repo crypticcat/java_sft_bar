@@ -14,13 +14,14 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import static org.hamcrest.CoreMatchers.*;
 import static org.hamcrest.MatcherAssert.assertThat;
+import static org.testng.Assert.assertEquals;
 
 public class ContactCreationTests extends TestBase {
 
@@ -75,8 +76,16 @@ public class ContactCreationTests extends TestBase {
         app.goTo().homePage();
         assertThat(app.contact().count(), equalTo(before.size() + 1));
         Contacts after = app.contact().all();
-        assertThat(after, equalTo(
-                before.withAdded(contact.withId(after.stream().mapToInt((g) -> g.getId()).max().getAsInt()))));
+
+        ContactData created = contact.withId(after.stream().mapToInt((g) -> g.getId()).max().getAsInt());
+
+        ContactData contactInfoFromEditForm = app.contact().infoFromEditForm(created);
+
+        assertThat(created.getFirstname(), equalTo(contactInfoFromEditForm.getFirstname()));
+        assertThat(created.getLastname(), equalTo(contactInfoFromEditForm.getLastname()));
+        assertThat(created.getAddress(), equalTo(contactInfoFromEditForm.getAddress()));
+        assertThat(app.contact().mergePhones(created), equalTo(app.contact().mergePhones(contactInfoFromEditForm)));
+        assertThat(app.contact().mergeEmails(created), equalTo(app.contact().mergeEmails(contactInfoFromEditForm)));
     }
 
 }

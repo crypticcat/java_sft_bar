@@ -8,8 +8,10 @@ import org.testng.Assert;
 import sft.bar.addressbook.model.ContactData;
 import sft.bar.addressbook.model.Contacts;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
+import java.util.stream.Collectors;
 
 public class ContactHelper extends HelperBase{
 
@@ -107,8 +109,8 @@ public class ContactHelper extends HelperBase{
         List<WebElement> elements = wd.findElements(By.name("entry"));
         for (WebElement element: elements) {
             List<WebElement> cells = wd.findElements(By.tagName("td"));
-            String firstname = cells.get(1).getText();
-            String lastname = cells.get(2).getText();
+            String lastname = cells.get(1).getText();
+            String firstname = cells.get(2).getText();
             String address = cells.get(3).getText();
             String allEmails = cells.get(4).getText();
             String allPhones = cells.get(5).getText();
@@ -136,7 +138,6 @@ public class ContactHelper extends HelperBase{
         return new ContactData().withId(contact.getId()).withFirstname(firstname).withLastname(lastname)
                 .withHome(home).withMobile(mobile).withWork(work)
                 .withAddress(address).withEmail(email).withEmail2(email2).withEmail3(email3);
-
     }
 
     private void initContactModificationById(int id) {
@@ -144,11 +145,30 @@ public class ContactHelper extends HelperBase{
         WebElement row = checkbox.findElement(By.xpath("./../.."));
         List<WebElement> cells = row.findElements(By.tagName("td"));
         cells.get(7).findElement(By.tagName("a")).click();
-
         //wd.findElement(By.xpath(String.format("//input[@value='%s']/../../td[8]/a", id))).click();
         //wd.findElement(By.xpath(String.format("//tr[.//input[@value='%s']]/td[8]/a", id))).click();
         //wd.findElement(By.cssSelector(String.format("a[href='edit.php?id=%s']", id))).click();
 
     }
 
+    //joining - collector that glues all the elements of the stream in one string
+    //map - apply the function to all the elements of the stream
+    // and return the result of this function
+    public String mergePhones(ContactData contact) {
+        return Arrays.asList(contact.getHome(), contact.getMobile(), contact.getWork())
+                .stream().filter((s) -> ! s.equals(""))
+                .map(ContactHelper::cleaned)
+                .collect(Collectors.joining("\n"));
+    }
+
+    //by adding Static we made the function global
+    public static String cleaned(String phone) {
+        return phone.replaceAll("\\s", "").replaceAll("[-()]", "");
+    }
+
+    public String mergeEmails(ContactData contact) {
+        return Arrays.asList(contact.getEmail(), contact.getEmail2(), contact.getEmail3())
+                .stream().filter((s) -> ! s.equals(""))
+                .collect(Collectors.joining("\n"));
+    }
 }
