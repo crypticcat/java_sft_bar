@@ -1,6 +1,8 @@
 package sft.bar.addressbook.tests;
 
 import org.hamcrest.CoreMatchers;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import sft.bar.addressbook.model.GroupData;
