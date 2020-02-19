@@ -77,15 +77,16 @@ public class ContactCreationTests extends TestBase {
         assertThat(app.contact().count(), equalTo(before.size() + 1));
         Contacts after = app.contact().all();
 
-        ContactData created = contact.withId(after.stream().mapToInt((g) -> g.getId()).max().getAsInt());
-
-        ContactData contactInfoFromEditForm = app.contact().infoFromEditForm(created);
-
-        assertThat(created.getFirstname(), equalTo(contactInfoFromEditForm.getFirstname()));
-        assertThat(created.getLastname(), equalTo(contactInfoFromEditForm.getLastname()));
-        assertThat(created.getAddress(), equalTo(contactInfoFromEditForm.getAddress()));
-        assertThat(app.contact().mergePhones(created), equalTo(app.contact().mergePhones(contactInfoFromEditForm)));
-        assertThat(app.contact().mergeEmails(created), equalTo(app.contact().mergeEmails(contactInfoFromEditForm)));
+        assertThat(after, equalTo(
+                before.withAdded(contact.withId(after.stream().mapToInt((g) -> g.getId()).max().getAsInt()))));
+        //alternative:
+        //ContactData created = contact.withId(after.stream().mapToInt((g) -> g.getId()).max().getAsInt());
+        //ContactData contactInfoFromEditForm = app.contact().infoFromEditForm(created);
+        //assertThat(created.getFirstname(), equalTo(contactInfoFromEditForm.getFirstname()));
+        //assertThat(created.getLastname(), equalTo(contactInfoFromEditForm.getLastname()));
+        //assertThat(created.getAddress(), equalTo(contactInfoFromEditForm.getAddress()));
+        //assertThat(app.contact().mergePhones(created), equalTo(app.contact().mergePhones(contactInfoFromEditForm)));
+        //assertThat(app.contact().mergeEmails(created), equalTo(app.contact().mergeEmails(contactInfoFromEditForm)));
     }
 
 }
