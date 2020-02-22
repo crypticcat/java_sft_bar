@@ -72,21 +72,15 @@ public class ContactCreationTests extends TestBase {
     public void testContactCreation(ContactData contact) throws Exception {
         app.goTo().homePage();
         Contacts before = app.contact().all();
+        System.out.println("before: " + before);
         app.contact().create(contact);
-        app.goTo().homePage();
-        assertThat(app.contact().count(), equalTo(before.size() + 1));
+
         Contacts after = app.contact().all();
+        System.out.println("after: " + after);
+        assertThat(app.contact().count(), equalTo(before.size() + 1));
 
         assertThat(after, equalTo(
                 before.withAdded(contact.withId(after.stream().mapToInt((g) -> g.getId()).max().getAsInt()))));
-        //alternative:
-        //ContactData created = contact.withId(after.stream().mapToInt((g) -> g.getId()).max().getAsInt());
-        //ContactData contactInfoFromEditForm = app.contact().infoFromEditForm(created);
-        //assertThat(created.getFirstname(), equalTo(contactInfoFromEditForm.getFirstname()));
-        //assertThat(created.getLastname(), equalTo(contactInfoFromEditForm.getLastname()));
-        //assertThat(created.getAddress(), equalTo(contactInfoFromEditForm.getAddress()));
-        //assertThat(app.contact().mergePhones(created), equalTo(app.contact().mergePhones(contactInfoFromEditForm)));
-        //assertThat(app.contact().mergeEmails(created), equalTo(app.contact().mergeEmails(contactInfoFromEditForm)));
     }
 
 }

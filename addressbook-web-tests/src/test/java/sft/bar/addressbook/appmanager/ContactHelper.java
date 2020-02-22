@@ -98,7 +98,7 @@ public class ContactHelper extends HelperBase{
         return wd.findElements(By.name("selected[]")).size();
     }
 
-    private Contacts contactCache = null;
+    private Contacts contactCache;
 
     public Contacts all() {
         if (contactCache != null) {
@@ -108,14 +108,16 @@ public class ContactHelper extends HelperBase{
         contactCache = new Contacts();
         List<WebElement> elements = wd.findElements(By.name("entry"));
         for (WebElement element: elements) {
-            List<WebElement> cells = wd.findElements(By.tagName("td"));
+            int id = Integer.parseInt(element.findElement(By.tagName("input")).getAttribute("value"));
+            List<WebElement> cells = element.findElements(By.tagName("td"));
+
             String lastname = cells.get(1).getText();
             String firstname = cells.get(2).getText();
             String address = cells.get(3).getText();
             String allEmails = cells.get(4).getText();
             String allPhones = cells.get(5).getText();
-            int id = Integer.parseInt(element.findElement(By.tagName("input")).getAttribute("value"));
-            contactCache.add(new ContactData().withId(id).withFirstname(firstname).withLastname(lastname)
+            contactCache.add(new ContactData().withId(id).withFirstname(firstname)
+                    .withLastname(lastname)
                     .withAddress(address)
                     .withAllPhones(allPhones)
                     .withAllEmails(allEmails));

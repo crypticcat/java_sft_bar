@@ -43,13 +43,8 @@ public class ContactModificationTests extends TestBase {
                 .withGroup("test 0");
         app.contact().modify(contact);
         assertEquals(app.contact().count(), before.size());
-        ContactData contactInfoFromEditForm = app.contact().infoFromEditForm(contact);
-        assertThat(contact.getFirstname(), equalTo(contactInfoFromEditForm.getFirstname()));
-        assertThat(contact.getLastname(), equalTo(contactInfoFromEditForm.getLastname()));
-        assertThat(contact.getAddress(), equalTo(contactInfoFromEditForm.getAddress()));
-        assertThat(app.contact().mergePhones(contact), equalTo(app.contact().mergePhones(contactInfoFromEditForm)));
-        assertThat(app.contact().mergeEmails(contact), equalTo(app.contact().mergeEmails(contactInfoFromEditForm)));
-        //assertThat(after, equalTo(before.without(modifiedContact).withAdded(contact)));
+        Contacts after = app.contact().all();
+        assertThat(after, equalTo(before.without(contactToModify).withAdded(contact)));
     }
 
 }
