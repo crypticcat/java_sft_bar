@@ -42,4 +42,14 @@ public class ApplicationManager {
     public void stop() {
         wd.quit();
     }
+
+    //method that initializes the helper with every run
+    //this helper is a lightweight, we can open a lot of sessions with it
+    public HttpSession newSession() {
+        return new HttpSession(this);
+    }
+
+    public String getProperty(String key) {
+        return properties.getProperty(key);
+    }
 }
