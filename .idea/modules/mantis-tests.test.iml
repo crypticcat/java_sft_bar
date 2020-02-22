@@ -13,6 +13,7 @@
     <orderEntry type="library" name="Gradle: org.seleniumhq.selenium:selenium-java:4.0.0-alpha-3" level="project" />
     <orderEntry type="library" name="Gradle: org.testng:testng:7.0.0" level="project" />
     <orderEntry type="library" name="Gradle: org.hamcrest:java-hamcrest:2.0.0.0" level="project" />
+    <orderEntry type="library" name="Gradle: org.apache.httpcomponents:httpclient:4.5.11" level="project" />
     <orderEntry type="library" name="Gradle: org.seleniumhq.selenium:selenium-support:4.0.0-alpha-3" level="project" />
     <orderEntry type="library" name="Gradle: org.seleniumhq.selenium:selenium-chrome-driver:4.0.0-alpha-3" level="project" />
     <orderEntry type="library" name="Gradle: org.seleniumhq.selenium:selenium-edgehtml-driver:4.0.0-alpha-3" level="project" />
@@ -29,6 +30,9 @@
     <orderEntry type="library" name="Gradle: org.seleniumhq.selenium:selenium-json:4.0.0-alpha-3" level="project" />
     <orderEntry type="library" name="Gradle: org.seleniumhq.selenium:selenium-api:4.0.0-alpha-3" level="project" />
     <orderEntry type="library" name="Gradle: com.beust:jcommander:1.72" level="project" />
+    <orderEntry type="library" name="Gradle: org.apache.httpcomponents:httpcore:4.4.13" level="project" />
+    <orderEntry type="library" name="Gradle: commons-logging:commons-logging:1.2" level="project" />
+    <orderEntry type="library" name="Gradle: commons-codec:commons-codec:1.11" level="project" />
     <orderEntry type="library" name="Gradle: com.google.guava:guava:27.1-jre" level="project" />
     <orderEntry type="library" name="Gradle: com.squareup.okhttp3:okhttp:4.0.1" level="project" />
     <orderEntry type="library" name="Gradle: io.opentracing:opentracing-api:0.33.0" level="project" />
