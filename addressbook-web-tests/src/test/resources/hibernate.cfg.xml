@@ -36,6 +36,7 @@
 
         <!-- Names the annotated entity class -->
         <mapping class="sft.bar.addressbook.model.GroupData"/>
+        <mapping class="sft.bar.addressbook.model.ContactData"/>
 
     </session-factory>
 

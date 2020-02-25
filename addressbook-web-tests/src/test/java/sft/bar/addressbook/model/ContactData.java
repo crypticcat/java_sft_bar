@@ -3,34 +3,61 @@ package sft.bar.addressbook.model;
 import com.google.gson.annotations.Expose;
 import com.thoughtworks.xstream.annotations.XStreamAlias;
 import com.thoughtworks.xstream.annotations.XStreamOmitField;
+import org.hibernate.annotations.Type;
 
+import javax.persistence.*;
 import java.util.Objects;
 
 @XStreamAlias("contact")
+@Entity
+@Table (name = "addressbook")
 public class ContactData {
     @XStreamOmitField
+    @Id
+    @Column(name = "id")//can omit if variaable name is the same as the table column name
     private int id = Integer.MAX_VALUE;
+
     @Expose
+    @Column(name = "firstname")
     private String firstname;
+
     @Expose
+    @Column(name = "lastname")
     private String lastname;
+
     @Expose
     private String address;
+
     @Expose
+    @Column(name = "mobile")
+    @Type(type = "text")
     private String mobile;
+
     @Expose
+    @Column(name = "home")
+    @Type(type = "text")
     private String home;
+
     @Expose
+    @Column(name = "work")
+    @Type(type = "text")
     private String work;
+
     @Expose
     private String email;
     @Expose
     private String email2;
     @Expose
     private String email3;
+
     @Expose
+    @Transient//will be omitted
     private String group;
+
+    @Transient
     private String allPhones;
+
+    @Transient
     private String allEmails;
 
     public String getAllPhones() {
