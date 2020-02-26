@@ -1,5 +1,6 @@
 package sft.bar.addressbook.model;
 
+import com.google.common.base.Objects;
 import com.google.gson.annotations.Expose;
 import com.thoughtworks.xstream.annotations.XStreamAlias;
 import com.thoughtworks.xstream.annotations.XStreamOmitField;
@@ -9,7 +10,6 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
-import java.util.Objects;
 
 @XStreamAlias("group")
 @Entity//this annotation declares that GroupData is bound with the database
@@ -42,20 +42,6 @@ public class GroupData {
         return header;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        GroupData groupData = (GroupData) o;
-        return id == groupData.id &&
-                Objects.equals(name, groupData.name);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, name);
-    }
-
     public String getFooter() {
         return footer;
     }
@@ -82,6 +68,22 @@ public class GroupData {
     public GroupData withFooter(String footer) {
         this.footer = footer;
         return this;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        GroupData groupData = (GroupData) o;
+        return id == groupData.id &&
+                Objects.equal(name, groupData.name) &&
+                Objects.equal(header, groupData.header) &&
+                Objects.equal(footer, groupData.footer);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(id, name, header, footer);
     }
 
     @Override

@@ -17,11 +17,9 @@ import java.io.IOException;
 import java.util.Iterator;
 import java.util.List;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 import static org.hamcrest.CoreMatchers.*;
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.testng.Assert.assertEquals;
 
 public class ContactCreationTests extends TestBase {
 
@@ -63,7 +61,7 @@ public class ContactCreationTests extends TestBase {
     public void ensurePreconditions() {
 
         app.goTo().groupPage();
-        if (app.group().all().size() == 0) {
+        if (app.db().groups().size() == 0) {
             app.group().createGroup(new GroupData().withName("test 0"));
         }
     }
@@ -71,11 +69,11 @@ public class ContactCreationTests extends TestBase {
     @Test(dataProvider = "validContactsFromJson")
     public void testContactCreation(ContactData contact) throws Exception {
         app.goTo().homePage();
-        Contacts before = app.contact().all();
+        Contacts before = app.db().contacts();
         System.out.println("before: " + before);
         app.contact().create(contact);
 
-        Contacts after = app.contact().all();
+        Contacts after = app.db().contacts();
         System.out.println("after: " + after);
         assertThat(app.contact().count(), equalTo(before.size() + 1));
 

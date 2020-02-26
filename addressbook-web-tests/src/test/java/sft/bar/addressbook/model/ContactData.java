@@ -1,12 +1,12 @@
 package sft.bar.addressbook.model;
 
+import com.google.common.base.Objects;
 import com.google.gson.annotations.Expose;
 import com.thoughtworks.xstream.annotations.XStreamAlias;
 import com.thoughtworks.xstream.annotations.XStreamOmitField;
 import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
-import java.util.Objects;
 
 @XStreamAlias("contact")
 @Entity
@@ -22,10 +22,23 @@ public class ContactData {
     private String firstname;
 
     @Expose
+    private String middlename;
+
+    @Expose
     @Column(name = "lastname")
     private String lastname;
 
     @Expose
+    private String nickname;
+
+    @Expose
+    private String company;
+
+    @Expose
+    private String title;
+
+    @Expose
+    @Type(type = "text")
     private String address;
 
     @Expose
@@ -44,11 +57,40 @@ public class ContactData {
     private String work;
 
     @Expose
+    @Type(type = "text")
+    private String fax;
+
+    @Expose
+    @Type(type = "text")
     private String email;
     @Expose
+    @Type(type = "text")
     private String email2;
     @Expose
+    @Type(type = "text")
     private String email3;
+
+    @Expose
+    @Type(type = "byte")
+    private byte bday;
+    @Expose
+    @Type(type = "string")
+    private String bmonth;
+    @Expose
+    @Type(type = "string")
+    private String byear;
+
+    @Expose
+    @Type(type = "byte")
+    private byte aday;
+
+    @Expose
+    @Type(type = "string")
+    private String amonth;
+
+    @Expose
+    @Type(type = "string")
+    private String ayear;
 
     @Expose
     @Transient//will be omitted
@@ -59,6 +101,50 @@ public class ContactData {
 
     @Transient
     private String allEmails;
+
+    public String getMiddlename() {
+        return middlename;
+    }
+
+    public String getNickname() {
+        return nickname;
+    }
+
+    public String getCompany() {
+        return company;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public String getFax() {
+        return fax;
+    }
+
+    public byte getBday() {
+        return bday;
+    }
+
+    public String getBmonth() {
+        return bmonth;
+    }
+
+    public String getByear() {
+        return byear;
+    }
+
+    public byte getAday() {
+        return aday;
+    }
+
+    public String getAmonth() {
+        return amonth;
+    }
+
+    public String getAyear() {
+        return ayear;
+    }
 
     public String getAllPhones() {
         return allPhones;
@@ -177,14 +263,59 @@ public class ContactData {
         return this;
     }
 
-    @Override
-    public String toString() {
-        return "ContactData{" +
-                "id=" + id +
-                ", firstname='" + firstname + '\'' +
-                ", lastname='" + lastname + '\'' +
-                ", address='" + address + '\'' +
-                '}';
+    public ContactData withMiddlename(String middlename) {
+        this.middlename = middlename;
+        return this;
+    }
+
+    public ContactData withNickname(String nickname) {
+        this.nickname = nickname;
+        return this;
+    }
+
+    public ContactData withCompany(String company) {
+        this.company = company;
+        return this;
+    }
+
+    public ContactData withTitle(String title) {
+        this.title = title;
+        return this;
+    }
+
+    public ContactData withFax(String fax) {
+        this.fax = fax;
+        return this;
+    }
+
+    public ContactData withBday(byte bday) {
+        this.bday = bday;
+        return this;
+    }
+
+    public ContactData withBmonth(String bmonth) {
+        this.bmonth = bmonth;
+        return this;
+    }
+
+    public ContactData withByear(String byear) {
+        this.byear = byear;
+        return this;
+    }
+
+    public ContactData withAday(byte aday) {
+        this.aday = aday;
+        return this;
+    }
+
+    public ContactData withAmonth(String amonth) {
+        this.amonth = amonth;
+        return this;
+    }
+
+    public ContactData withAyear(String ayear) {
+        this.ayear = ayear;
+        return this;
     }
 
     @Override
@@ -193,13 +324,60 @@ public class ContactData {
         if (o == null || getClass() != o.getClass()) return false;
         ContactData that = (ContactData) o;
         return id == that.id &&
-                Objects.equals(firstname, that.firstname) &&
-                Objects.equals(lastname, that.lastname) &&
-                Objects.equals(address, that.address);
+                Objects.equal(firstname, that.firstname) &&
+                Objects.equal(middlename, that.middlename) &&
+                Objects.equal(lastname, that.lastname) &&
+                Objects.equal(nickname, that.nickname) &&
+                Objects.equal(company, that.company) &&
+                Objects.equal(title, that.title) &&
+                Objects.equal(address, that.address) &&
+                Objects.equal(mobile, that.mobile) &&
+                Objects.equal(home, that.home) &&
+                Objects.equal(work, that.work) &&
+                Objects.equal(fax, that.fax) &&
+                Objects.equal(email, that.email) &&
+                Objects.equal(email2, that.email2) &&
+                Objects.equal(email3, that.email3) &&
+                Objects.equal(bday, that.bday) &&
+                Objects.equal(bmonth, that.bmonth) &&
+                Objects.equal(byear, that.byear) &&
+                Objects.equal(aday, that.aday) &&
+                Objects.equal(amonth, that.amonth) &&
+                Objects.equal(ayear, that.ayear) &&
+                Objects.equal(allPhones, that.allPhones) &&
+                Objects.equal(allEmails, that.allEmails);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, firstname, lastname, address);
+        return Objects.hashCode(id, firstname, middlename, lastname, nickname, company, title, address, mobile, home, work, fax, email, email2, email3, bday, bmonth, byear, aday, amonth, ayear, allPhones, allEmails);
     }
+
+    @Override
+    public String toString() {
+        return "ContactData{" +
+                "id=" + id +
+                ", firstname='" + firstname + '\'' +
+                ", middlename='" + middlename + '\'' +
+                ", lastname='" + lastname + '\'' +
+                ", nickname='" + nickname + '\'' +
+                ", company='" + company + '\'' +
+                ", title='" + title + '\'' +
+                ", address='" + address + '\'' +
+                ", mobile='" + mobile + '\'' +
+                ", home='" + home + '\'' +
+                ", work='" + work + '\'' +
+                ", fax='" + fax + '\'' +
+                ", email='" + email + '\'' +
+                ", email2='" + email2 + '\'' +
+                ", email3='" + email3 + '\'' +
+                ", bday='" + bday + '\'' +
+                ", bmonth='" + bmonth + '\'' +
+                ", byear='" + byear + '\'' +
+                ", aday='" + aday + '\'' +
+                ", amonth='" + amonth + '\'' +
+                ", ayear='" + ayear + '\'' +
+                '}';
+    }
+
 }

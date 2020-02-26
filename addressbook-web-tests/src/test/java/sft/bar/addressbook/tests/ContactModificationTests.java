@@ -16,16 +16,21 @@ public class ContactModificationTests extends TestBase {
     public void ensurePreconditions() {
 
         app.goTo().groupPage();
-        if (app.group().all().size() == 0) {
+        if (app.db().groups().size() == 0) {
             app.group().createGroup(new GroupData().withName("test 0"));
         }
 
         app.goTo().homePage();
-        if (app.contact().all().size() == 0) {
-            app.contact().create(new ContactData().withFirstname("Nadya").withLastname("Test")
+        if (app.db().contacts().size() == 0) {
+            app.contact().create(new ContactData().withFirstname("Nadya")
+                    .withMiddlename("Middle").withLastname("Test").withNickname("Nick")
+                    .withCompany("Company").withTitle("Title")
                     .withAddress("Russia, Spb")
-                    .withHome("8(812)111-11-11").withMobile("+7(900)111-11-11").withWork("8 812 777 77 77")
+                    .withHome("8(812)111-11-11").withMobile("+7(900)111-11-11")
+                    .withWork("8 812 777 77 77").withFax("8 812 777 77 78")
                     .withEmail("email@gmail.com").withEmail2("email2@gmail.com").withEmail3("email3@gmail.com")
+                    .withBday((byte) 11).withBmonth("January").withByear("1981")
+                    .withAday((byte) 18).withAmonth("January").withAyear("2020")
                     .withGroup("test 0"));
         }
     }
@@ -33,17 +38,22 @@ public class ContactModificationTests extends TestBase {
     @Test
     public void testContactModification() {
         app.goTo().homePage();
-        Contacts before = app.contact().all();
+        Contacts before = app.db().contacts();
         ContactData contactToModify = before.iterator().next();
         ContactData contact = new ContactData()
-                .withId(contactToModify.getId()).withFirstname("Nadya").withLastname("TestM")
+                .withId(contactToModify.getId()).withFirstname("Nadya")
+                .withMiddlename("Middle").withLastname("Test").withNickname("Nick")
+                .withCompany("Company").withTitle("Title")
                 .withAddress("Russia, Spb")
-                .withHome("8(812)111-11-11").withMobile("+7(900)111-11-11").withWork("8 812 777 77 77")
+                .withHome("8(812)111-11-11").withMobile("+7(900)111-11-11")
+                .withWork("8 812 777 77 77").withFax("8 812 777 77 78")
                 .withEmail("email@gmail.com").withEmail2("email2@gmail.com").withEmail3("email3@gmail.com")
+                .withBday((byte) 11).withBmonth("January").withByear("1981")
+                .withAday((byte) 18).withAmonth("January").withAyear("2020")
                 .withGroup("test 0");
         app.contact().modify(contact);
         assertEquals(app.contact().count(), before.size());
-        Contacts after = app.contact().all();
+        Contacts after = app.db().contacts();
         assertThat(after, equalTo(before.without(contactToModify).withAdded(contact)));
     }
 
