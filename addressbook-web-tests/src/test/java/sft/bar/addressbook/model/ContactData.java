@@ -325,32 +325,13 @@ public class ContactData {
         ContactData that = (ContactData) o;
         return id == that.id &&
                 Objects.equal(firstname, that.firstname) &&
-                Objects.equal(middlename, that.middlename) &&
                 Objects.equal(lastname, that.lastname) &&
-                Objects.equal(nickname, that.nickname) &&
-                Objects.equal(company, that.company) &&
-                Objects.equal(title, that.title) &&
-                Objects.equal(address, that.address) &&
-                Objects.equal(mobile, that.mobile) &&
-                Objects.equal(home, that.home) &&
-                Objects.equal(work, that.work) &&
-                Objects.equal(fax, that.fax) &&
-                Objects.equal(email, that.email) &&
-                Objects.equal(email2, that.email2) &&
-                Objects.equal(email3, that.email3) &&
-                Objects.equal(bday, that.bday) &&
-                Objects.equal(bmonth, that.bmonth) &&
-                Objects.equal(byear, that.byear) &&
-                Objects.equal(aday, that.aday) &&
-                Objects.equal(amonth, that.amonth) &&
-                Objects.equal(ayear, that.ayear) &&
-                Objects.equal(allPhones, that.allPhones) &&
-                Objects.equal(allEmails, that.allEmails);
+                Objects.equal(address, that.address);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hashCode(id, firstname, middlename, lastname, nickname, company, title, address, mobile, home, work, fax, email, email2, email3, bday, bmonth, byear, aday, amonth, ayear, allPhones, allEmails);
+        return Objects.hashCode(id, firstname, lastname, address);
     }
 
     @Override
@@ -358,26 +339,8 @@ public class ContactData {
         return "ContactData{" +
                 "id=" + id +
                 ", firstname='" + firstname + '\'' +
-                ", middlename='" + middlename + '\'' +
                 ", lastname='" + lastname + '\'' +
-                ", nickname='" + nickname + '\'' +
-                ", company='" + company + '\'' +
-                ", title='" + title + '\'' +
                 ", address='" + address + '\'' +
-                ", mobile='" + mobile + '\'' +
-                ", home='" + home + '\'' +
-                ", work='" + work + '\'' +
-                ", fax='" + fax + '\'' +
-                ", email='" + email + '\'' +
-                ", email2='" + email2 + '\'' +
-                ", email3='" + email3 + '\'' +
-                ", bday='" + bday + '\'' +
-                ", bmonth='" + bmonth + '\'' +
-                ", byear='" + byear + '\'' +
-                ", aday='" + aday + '\'' +
-                ", amonth='" + amonth + '\'' +
-                ", ayear='" + ayear + '\'' +
                 '}';
     }
-
 }
