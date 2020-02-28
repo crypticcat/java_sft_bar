@@ -25,6 +25,7 @@ public class ApplicationManager {
     private RegistrationHelper registrationHelper;
     private FtpHelper ftp;
     private MailHelper mail;
+    private ManageUsersHelper manage;
 
     public ApplicationManager(String browser) {
         this.browser = browser;
@@ -73,6 +74,13 @@ public class ApplicationManager {
         return mail;
     }
 
+    public ManageUsersHelper manage() {
+        if (manage == null) {
+            manage = new ManageUsersHelper(this);
+        }
+        return manage;
+    }
+
     //lazy browser initialization
     public WebDriver getDriver() {
         if (wd == null) {
@@ -82,9 +90,9 @@ public class ApplicationManager {
                 ChromeOptions options = new ChromeOptions();
                 options.addArguments("--incognito");
                 wd = new ChromeDriver(options);
-                wd.manage().deleteAllCookies();
-                wd.get("chrome://settings/clearBrowserData");
-                wd.findElement(By.xpath("//settings-ui")).sendKeys(Keys.ENTER);
+                //wd.manage().deleteAllCookies();
+                //wd.get("chrome://settings/clearBrowserData");
+                //wd.findElement(By.xpath("//settings-ui")).sendKeys(Keys.ENTER);
             } else if (browser.equals(BrowserType.IE)) {
                 wd = new InternetExplorerDriver();
             }
