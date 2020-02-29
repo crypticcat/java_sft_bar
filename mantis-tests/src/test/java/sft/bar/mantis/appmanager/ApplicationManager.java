@@ -1,19 +1,15 @@
 package sft.bar.mantis.appmanager;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.remote.BrowserType;
-import org.openqa.selenium.remote.DesiredCapabilities;
 
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.Arrays;
 import java.util.Properties;
 
 public class ApplicationManager {
@@ -26,6 +22,7 @@ public class ApplicationManager {
     private FtpHelper ftp;
     private MailHelper mail;
     private ManageUsersHelper manage;
+    private DbHelper db;
 
     public ApplicationManager(String browser) {
         this.browser = browser;
@@ -80,6 +77,14 @@ public class ApplicationManager {
         }
         return manage;
     }
+
+    public DbHelper db() {
+        if (db == null) {
+            db = new DbHelper(this);
+        }
+        return db;
+    }
+
 
     //lazy browser initialization
     public WebDriver getDriver() {
