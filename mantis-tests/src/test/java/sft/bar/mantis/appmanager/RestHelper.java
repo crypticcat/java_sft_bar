@@ -22,8 +22,9 @@ public class RestHelper {
         String json = getExecutor().execute(Request.Get(String.format(app.getProperty("rest.url") + "/issues/%s.json", id)))
                 .returnContent().asString();
         JsonElement parsed = new JsonParser().parse(json);
-        JsonElement state = parsed.getAsJsonObject().get("state_name");
-        return new Gson().fromJson(state, new TypeToken<String>() {}.getType());
+        String state = parsed.getAsJsonObject().getAsJsonArray("issues")
+                .get(0).getAsJsonObject().get("state_name").getAsString();
+        return state;
     }
 
     private Executor getExecutor() {

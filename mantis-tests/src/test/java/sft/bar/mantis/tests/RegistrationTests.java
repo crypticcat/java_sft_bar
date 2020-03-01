@@ -20,8 +20,6 @@ public class RegistrationTests extends TestBase {
 
     @Test
     public void testRegistration() throws IOException {
-        int issueId = 2240;
-        skipIfNotFixed(issueId);
         long now = System.currentTimeMillis();
         String user = String.format("user%s", now);
         String password = "password";

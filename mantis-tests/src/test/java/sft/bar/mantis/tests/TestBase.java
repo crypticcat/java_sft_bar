@@ -20,7 +20,7 @@ public class TestBase {
     }
 
     boolean isIssueOpen(int issueId) throws IOException {
-        String state = String.valueOf(app.rest().getIssueState(issueId));
+        String state = app.rest().getIssueState(issueId);
         if (!state.equals("Resolved") || !state.equals("Closed")) {
             return true;
         } else {
@@ -30,6 +30,7 @@ public class TestBase {
 
     public void skipIfNotFixed(int issueId) throws IOException {
         if (isIssueOpen(issueId)) {
+            System.out.println("Ignored because of issue " + issueId);
             throw new SkipException("Ignored because of issue " + issueId);
         }
     }
