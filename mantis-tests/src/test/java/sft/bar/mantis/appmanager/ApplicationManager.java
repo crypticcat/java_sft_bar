@@ -23,6 +23,8 @@ public class ApplicationManager {
     private MailHelper mail;
     private ManageUsersHelper manage;
     private DbHelper db;
+    private SoapHelper soap;
+    private RestHelper rest;
 
     public ApplicationManager(String browser) {
         this.browser = browser;
@@ -85,6 +87,19 @@ public class ApplicationManager {
         return db;
     }
 
+    public SoapHelper soap() {
+        if (soap == null) {
+            soap = new SoapHelper(this);
+        }
+        return soap;
+    }
+
+    public RestHelper rest() {
+        if (rest == null) {
+            rest = new RestHelper(this);
+        }
+        return rest;
+    }
 
     //lazy browser initialization
     public WebDriver getDriver() {
