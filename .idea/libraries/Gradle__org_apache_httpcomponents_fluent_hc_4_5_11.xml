@@ -1,0 +1,11 @@
+<component name="libraryTable">
+  <library name="Gradle: org.apache.httpcomponents:fluent-hc:4.5.11">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.apache.httpcomponents/fluent-hc/4.5.11/62d92c4def24494f61d5b40873ab0eacf9847dee/fluent-hc-4.5.11.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.apache.httpcomponents/fluent-hc/4.5.11/e77ae12a9d7211b6d6f564bf85a49e17ed3f339c/fluent-hc-4.5.11-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>
