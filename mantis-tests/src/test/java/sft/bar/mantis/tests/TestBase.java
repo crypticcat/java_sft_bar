@@ -6,6 +6,7 @@ import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeSuite;
 import sft.bar.mantis.appmanager.ApplicationManager;
 
+import javax.xml.rpc.ServiceException;
 import java.io.File;
 import java.io.IOException;
 
@@ -28,8 +29,17 @@ public class TestBase {
         }
     }
 
-    public void skipIfNotFixed(int issueId) throws IOException {
-        if (isIssueOpen(issueId)) {
+    boolean isIssueOpenSoap(int issueId) throws IOException, ServiceException {
+        String state = app.soap().getIssueState(issueId);
+        if (!state.equals("resolved") || !state.equals("closed")) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public void skipIfNotFixed(int issueId) throws IOException, ServiceException {
+        if (isIssueOpenSoap(issueId)) {
             System.out.println("Ignored because of issue " + issueId);
             throw new SkipException("Ignored because of issue " + issueId);
         }
