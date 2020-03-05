@@ -7,11 +7,15 @@ import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
 import sft.bar.addressbook.model.ContactData;
 import sft.bar.addressbook.model.Contacts;
+import sft.bar.addressbook.model.GroupData;
+import sft.bar.addressbook.model.Groups;
 
 import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
+
+import static org.testng.Assert.assertTrue;
 
 public class ContactHelper extends HelperBase{
 
@@ -54,7 +58,10 @@ public class ContactHelper extends HelperBase{
         type(By.name("byear"), contactData.getByear());
 
         if (creation) {
-            new Select(wd.findElement(By.name("new_group"))).selectByVisibleText(contactData.getGroup());
+            if (contactData.getGroups().size() > 0) {
+                assertTrue(contactData.getGroups().size() == 1);
+                new Select(wd.findElement(By.name("new_group"))).selectByVisibleText(String.valueOf(contactData.getGroups().iterator().next()));
+            }
         } else {
             Assert.assertFalse(isElementPresent(By.name("new_group")));
         }
@@ -184,4 +191,26 @@ public class ContactHelper extends HelperBase{
                 .stream().filter((s) -> ! s.equals(""))
                 .collect(Collectors.joining("\n"));
     }
+
+
+    public void addToGroup(ContactData contact, GroupData group) {
+        //verifyContactIsInSelectedGroup(contact, group);
+        selectContactById(contact.getId());
+        new Select(wd.findElement(By.name("to_group"))).selectByValue(String.valueOf(group.getId()));
+        submitAddToGroup();
+    }
+
+    public void submitAddToGroup() {
+        wd.findElement(By.name("add")).click();
+    }
+
+    public void removeFromGroup(ContactData contact) {
+        selectContactById(contact.getId());
+        submitRemoveFromGroup();
+    }
+
+    public void submitRemoveFromGroup() {
+        wd.findElement(By.name("remove")).click();
+    }
+
 }

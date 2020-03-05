@@ -6,9 +6,10 @@ import sft.bar.addressbook.model.ContactData;
 import sft.bar.addressbook.model.Contacts;
 import sft.bar.addressbook.model.GroupData;
 
+import java.util.stream.Collectors;
+
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.testng.Assert.assertEquals;
 
 public class ContactRemoveFromGroup extends TestBase {
 
@@ -52,14 +53,21 @@ public class ContactRemoveFromGroup extends TestBase {
         ContactData contact = null;
         if (group.getContacts().size() > 1) {
             contact = group.getContacts().iterator().next();
-            app.goTo().singleGroupPage(group.getId());
+            app.goTo().singleGroupPage(group.getId());//could it bring some problems?
         } else if (group.getContacts().size() == 0) {
             app.goTo().homePageFromSingleGroupPage();
-            ContactData contactToAdd = app.db().contacts().iterator().next();
+            //ContactData contactToAdd = app.db().contacts().iterator().next();
+            // а если один контакт в базе?? см как делала по аналогии
             app.contact().addToGroup(contactToAdd, group);
-            group.getContacts().forEach (e -> System.out.println(e) );
+            //group.getContacts().stream().filter((c) -> c.getId()).collect(Collectors.toList());
+                    //
+            // users.stream()
+            //        .filter(user -> user.getId() > 0)
+            //        .collect(toSingleton());.
+            //        findFirst().orElse(null);
+            //group.getContacts().forEach (e ->  //);
         } else {
-            group.getContacts().forEach (e -> System.out.println(e) );
+            group.getContacts().forEach (e ->  //);
         }
         return contact;
     }

@@ -9,6 +9,7 @@ import org.testng.annotations.Test;
 import sft.bar.addressbook.model.ContactData;
 import sft.bar.addressbook.model.Contacts;
 import sft.bar.addressbook.model.GroupData;
+import sft.bar.addressbook.model.Groups;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -59,7 +60,6 @@ public class ContactCreationTests extends TestBase {
 
     @BeforeMethod
     public void ensurePreconditions() {
-
         app.goTo().groupPage();
         if (app.db().groups().size() == 0) {
             app.group().createGroup(new GroupData().withName("test 0"));

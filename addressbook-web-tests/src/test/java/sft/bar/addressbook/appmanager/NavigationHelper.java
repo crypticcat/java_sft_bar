@@ -25,4 +25,16 @@ public class NavigationHelper extends HelperBase{
         }
         click(By.linkText("home"));
     }
+
+    public void singleGroupPage(int id) {
+        wd.get(String.format("http://localhost/?group=%s", id));
+    }
+
+    public void singleGroupPageByLink() {
+        wd.findElement(By.xpath("//*[@id=\"content\"]/div/i/a")).click();
+    }
+
+    public void homePageFromSingleGroupPage() {
+        wd.get("http://localhost/");
+    }
 }

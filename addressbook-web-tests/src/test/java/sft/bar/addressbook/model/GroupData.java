@@ -6,10 +6,9 @@ import com.thoughtworks.xstream.annotations.XStreamAlias;
 import com.thoughtworks.xstream.annotations.XStreamOmitField;
 import org.hibernate.annotations.Type;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 @XStreamAlias("group")
 @Entity//this annotation declares that GroupData is bound with the database
@@ -33,6 +32,16 @@ public class GroupData {
     @Column(name = "group_footer")
     @Type(type = "text")
     private String footer;
+
+    public Contacts getContacts() {
+        return new Contacts(contacts);
+    }
+
+    //@ManyToMany(mappedBy = "groups")
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable (name = "address_in_groups",
+            joinColumns = @JoinColumn (name = "group_id"), inverseJoinColumns = @JoinColumn (name = "id"))
+    private Set<ContactData> contacts = new HashSet<ContactData>();
 
     public int getId() {
         return id;

@@ -78,8 +78,8 @@ public class ContactDataGenerator {
                         contact.getHome(), contact.getMobile(), contact.getWork(), contact.getFax(),
                         contact.getEmail(), contact.getEmail2(), contact.getEmail3(),
                         contact.getBday(), contact.getBmonth(), contact.getByear(),
-                        contact.getAday(), contact.getAmonth(), contact.getAyear(),
-                        contact.getGroup()));
+                        contact.getAday(), contact.getAmonth(), contact.getAyear()));
+                        //contact.getGroup()));
             }
         }
     }
@@ -99,8 +99,8 @@ public class ContactDataGenerator {
                     .withEmail(String.format("email%s@gmail.com", i)).withEmail2(String.format("email2%s@gmail.com", i))
                     .withEmail3(String.format("email3%s@gmail.com", i))
                     .withBday((byte) 12).withBmonth("January").withByear(String.format("198%s", i))
-                    .withAday((byte) 18).withAmonth("January").withAyear(String.format("201%s", i))
-                            .withGroup(String.format("test %s", i)));
+                    .withAday((byte) 18).withAmonth("January").withAyear(String.format("201%s", i)));
+                            //.withGroup(String.format("test %s", i)));
         }
         return contacts;
     }

@@ -30,8 +30,8 @@ public class ContactModificationTests extends TestBase {
                     .withWork("8 812 777 77 77").withFax("8 812 777 77 78")
                     .withEmail("email@gmail.com").withEmail2("email2@gmail.com").withEmail3("email3@gmail.com")
                     .withBday((byte) 11).withBmonth("January").withByear("1981")
-                    .withAday((byte) 18).withAmonth("January").withAyear("2020")
-                    .withGroup("test 0"));
+                    .withAday((byte) 18).withAmonth("January").withAyear("2020"));
+                    //.withGroup("test 0"));
         }
     }
 
@@ -49,8 +49,7 @@ public class ContactModificationTests extends TestBase {
                 .withWork("8 812 777 77 77").withFax("8 812 777 77 78")
                 .withEmail("email@gmail.com").withEmail2("email2@gmail.com").withEmail3("email3@gmail.com")
                 .withBday((byte) 11).withBmonth("January").withByear("1981")
-                .withAday((byte) 18).withAmonth("January").withAyear("2020")
-                .withGroup("test 0");
+                .withAday((byte) 18).withAmonth("January").withAyear("2020");
         app.contact().modify(contact);
         assertEquals(app.contact().count(), before.size());
         Contacts after = app.db().contacts();
