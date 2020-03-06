@@ -192,9 +192,7 @@ public class ContactHelper extends HelperBase{
                 .collect(Collectors.joining("\n"));
     }
 
-
     public void addToGroup(ContactData contact, GroupData group) {
-        //verifyContactIsInSelectedGroup(contact, group);
         selectContactById(contact.getId());
         new Select(wd.findElement(By.name("to_group"))).selectByValue(String.valueOf(group.getId()));
         submitAddToGroup();
@@ -212,5 +210,4 @@ public class ContactHelper extends HelperBase{
     public void submitRemoveFromGroup() {
         wd.findElement(By.name("remove")).click();
     }
-
 }

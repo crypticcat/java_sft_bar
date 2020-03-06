@@ -71,4 +71,41 @@ public class TestBase {
                         .withAddress(g.getAddress()))
                 .collect(Collectors.toSet())));
     }
+
+
+    public void createIfNoContacts() {
+        if (app.db().contacts().size() == 0) {
+            app.contact().create(new ContactData().withFirstname("Nadya")
+                    .withMiddlename("Middle").withLastname("Test").withNickname("Nick")
+                    .withCompany("Company").withTitle("Title")
+                    .withAddress("Russia, Spb")
+                    .withHome("8(812)111-11-11").withMobile("+7(900)111-11-11")
+                    .withWork("8 812 777 77 77").withFax("8 812 777 77 78")
+                    .withEmail("email@gmail.com").withEmail2("email2@gmail.com").withEmail3("email3@gmail.com")
+                    .withBday((byte) 12).withBmonth("January").withByear("1981")
+                    .withAday((byte) 18).withAmonth("January").withAyear("2020"));
+        }
+    }
+
+    public void createIfNoGroups() {
+            if (app.db().groups().size() == 0) {
+            app.goTo().groupPage();
+            app.group().createGroup(new GroupData().withName("test 0"));
+        }
+    }
+
+    public void createNewGroupIfHasAllGroups(ContactData contact) {
+        if (contact.getGroups().size() == app.db().groups().size()) {
+            app.goTo().groupPage();
+            app.group().createGroup(new GroupData().withName("test 0"));
+        }
+    }
+
+        public void addIfNoContactsInGroup(GroupData group) {
+        if (group.getContacts().size() == 0) {
+            app.goTo().homePage();
+            ContactData contactToAdd = app.db().contacts().stream().findAny().get();
+            app.contact().addToGroup(contactToAdd, group);
+        }
+    }
 }
