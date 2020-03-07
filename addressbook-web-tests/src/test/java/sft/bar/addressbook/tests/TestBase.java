@@ -14,6 +14,7 @@ import sft.bar.addressbook.model.GroupData;
 import sft.bar.addressbook.model.Groups;
 
 import java.lang.reflect.Method;
+import java.security.acl.Group;
 import java.util.Arrays;
 import java.util.stream.Collectors;
 
@@ -94,18 +95,24 @@ public class TestBase {
         }
     }
 
-    public void createNewGroupIfHasAllGroups(ContactData contact) {
+    public void createGroupIfHasAllGroups(ContactData contact) {
         if (contact.getGroups().size() == app.db().groups().size()) {
             app.goTo().groupPage();
             app.group().createGroup(new GroupData().withName("test 0"));
         }
     }
 
-        public void addIfNoContactsInGroup(GroupData group) {
-        if (group.getContacts().size() == 0) {
-            app.goTo().homePage();
-            ContactData contactToAdd = app.db().contacts().stream().findAny().get();
-            app.contact().addToGroup(contactToAdd, group);
+    public GroupData chooseGroup() {
+        GroupData group = app.db().groups1().stream().findAny().get();
+        if (group.getContacts().size() > 0) {
+        } else if (group.getContacts().size() == 0) {
+            //contact.
+            //app.contact().addToGroup(contact, group);
+            //Groups contactGroupsAfter = contacts2.stream()
+            //        .filter(c -> contacts2.contains(c.withId(id))).findAny().get().getGroups();
+            //ContactData groupWithAdded = app.db().groups1.stream().findFirst().get();
+            //return groupWithAdded;
         }
+        return group;
     }
 }

@@ -29,6 +29,7 @@ public class DbHelper {
         session.beginTransaction();
         List<GroupData> result = session.createQuery("from GroupData").list();
         session.getTransaction().commit();
+        session.clear();
         session.close();
         return new Groups(result);
     }
@@ -38,7 +39,48 @@ public class DbHelper {
         session.beginTransaction();
         List<ContactData> result = session.createQuery("from ContactData").list();
         session.getTransaction().commit();
+        session.clear();
         session.close();
         return new Contacts(result);
+    }
+
+    public Contacts contacts1() {
+        Session session = sessionFactory.openSession();
+        session.beginTransaction();
+        List<ContactData> result = session.createQuery("from ContactData").list();
+        session.getTransaction().commit();
+        session.clear();
+        session.close();
+        return new Contacts(result);
+    }
+
+    public Groups groups1() {
+        Session session = sessionFactory.openSession();
+        session.beginTransaction();
+        List<GroupData> result = session.createQuery("from GroupData").list();
+        session.getTransaction().commit();
+        session.clear();
+        session.close();
+        return new Groups(result);
+    }
+
+    public Contacts contacts2() {
+        Session session = sessionFactory.openSession();
+        session.beginTransaction();
+        List<ContactData> result = session.createQuery("from ContactData").list();
+        session.getTransaction().commit();
+        session.clear();
+        session.close();
+        return new Contacts(result);
+    }
+
+    public Groups groups2() {
+        Session session = sessionFactory.openSession();
+        session.beginTransaction();
+        List<GroupData> result = session.createQuery("from GroupData").list();
+        session.getTransaction().commit();
+        session.clear();
+        session.close();
+        return new Groups(result);
     }
 }
