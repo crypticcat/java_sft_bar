@@ -1,5 +1,6 @@
 package sft.bar.addressbook.appmanager;
 
+import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.Platform;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -48,7 +49,8 @@ public class ApplicationManager {
                 wd = new ChromeDriver();
             }
         } else {
-            System.setProperty("webdriver.chrome.driver", "C:\\Drivers\\chromedriver.exe");
+            //System.setProperty("webdriver.chrome.driver", "C:\\Drivers\\chromedriver.exe");
+            WebDriverManager.chromedriver().setup();
             DesiredCapabilities capabilities = new DesiredCapabilities();
             capabilities.setBrowserName(browser);
             capabilities.setPlatform(Platform.fromString(System.getProperty("platform", "win10")));
