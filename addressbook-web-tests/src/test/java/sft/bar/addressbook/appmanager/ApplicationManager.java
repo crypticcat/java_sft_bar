@@ -47,11 +47,12 @@ public class ApplicationManager {
                 wd = new ChromeDriver();
             }
         } else {
-            System.setProperty(properties.getProperty("web.ChromeBrowserDriver"), properties.getProperty("web.ChromeBrowserDriverPath"));
+            //System.setProperty(properties.getProperty("web.chromeBrowserDriver"), properties.getProperty("web.chromeBrowserDriverPath"));
             DesiredCapabilities capabilities = new DesiredCapabilities();
             capabilities.setBrowserName(browser);
             capabilities.setPlatform(Platform.fromString(System.getProperty("platform", "win10")));
             wd = new RemoteWebDriver(new URL(properties.getProperty("selenium.server")), capabilities);
+            wd.get("http://www.google.com");
         }
 
         //wd.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
