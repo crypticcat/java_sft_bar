@@ -3,6 +3,7 @@ package sft.bar.addressbook.appmanager;
 import org.openqa.selenium.Platform;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.remote.BrowserType;
 import org.openqa.selenium.remote.DesiredCapabilities;
@@ -47,12 +48,12 @@ public class ApplicationManager {
                 wd = new ChromeDriver();
             }
         } else {
-            //System.setProperty(properties.getProperty("web.chromeBrowserDriver"), properties.getProperty("web.chromeBrowserDriverPath"));
+            ChromeOptions options = new ChromeOptions();
+            options.setBinary(properties.getProperty("web.chromeBrowserDriverPath"));
             DesiredCapabilities capabilities = new DesiredCapabilities();
             capabilities.setBrowserName(browser);
             capabilities.setPlatform(Platform.fromString(System.getProperty("platform", "win10")));
             wd = new RemoteWebDriver(new URL(properties.getProperty("selenium.server")), capabilities);
-            wd.get("http://www.google.com");
         }
 
         //wd.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
