@@ -48,8 +48,7 @@ public class ApplicationManager {
                 wd = new ChromeDriver();
             }
         } else {
-            ChromeOptions options = new ChromeOptions();
-            options.setBinary(properties.getProperty("web.chromeBrowserDriverPath"));
+            System.setProperty("webdriver.chrome.driver", "C:\\Drivers\\chromedriver.exe");
             DesiredCapabilities capabilities = new DesiredCapabilities();
             capabilities.setBrowserName(browser);
             capabilities.setPlatform(Platform.fromString(System.getProperty("platform", "win10")));
