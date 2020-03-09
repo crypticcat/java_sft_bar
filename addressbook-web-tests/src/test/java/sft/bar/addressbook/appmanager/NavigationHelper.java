@@ -20,10 +20,7 @@ public class NavigationHelper extends HelperBase{
     }
 
     public void homePage() {
-        if (isElementPresent(By.id("maintable"))) {
-            return;
-        }
-        click(By.linkText("home"));
+        wd.get("http://localhost");
     }
 
     public void singleGroupPage(int id) {

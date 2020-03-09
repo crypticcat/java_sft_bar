@@ -1,28 +1,20 @@
 package sft.bar.addressbook.tests;
 
-import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import sft.bar.addressbook.model.ContactData;
 import sft.bar.addressbook.model.Contacts;
 import sft.bar.addressbook.model.GroupData;
-import sft.bar.addressbook.model.Groups;
 
 import java.util.stream.Collectors;
 
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
 
-public class ContactRemoveFromGroup extends TestBase {
+public class ContactRemoveFromGroup extends ContactAddToGroup {
 
-    @BeforeMethod
-    public void ensurePreconditions() {
-        createIfNoContacts();
-        createIfNoGroups();
-    }
-
-    @Test
+    @Test(dependsOnMethods = { "testContactAddToGroup" })
     public void testContactRemoveFromGroup () {
-        GroupData group = chooseGroup();
+        GroupData group = app.db().groups1().stream().findAny().get();
         logger.info("Group:" + group);
         int groupId = group.getId();
 

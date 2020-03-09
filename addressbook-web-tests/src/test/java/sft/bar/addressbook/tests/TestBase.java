@@ -102,17 +102,4 @@ public class TestBase {
         }
     }
 
-    public GroupData chooseGroup() {
-        GroupData group = app.db().groups1().stream().findAny().get();
-        if (group.getContacts().size() > 0) {
-        } else if (group.getContacts().size() == 0) {
-            //contact.
-            //app.contact().addToGroup(contact, group);
-            //Groups contactGroupsAfter = contacts2.stream()
-            //        .filter(c -> contacts2.contains(c.withId(id))).findAny().get().getGroups();
-            //ContactData groupWithAdded = app.db().groups1.stream().findFirst().get();
-            //return groupWithAdded;
-        }
-        return group;
-    }
 }
